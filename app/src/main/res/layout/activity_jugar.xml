@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/activity_jugar"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center_horizontal"
+    android:orientation="vertical"
+    android:background="@color/colorPrimary"
+    tools:context=".Activities.JugarActivity">
+
+        <fragment
+            android:id="@+id/tableroFragment"
+            android:name="com.david_galera.hundirlaflota.Fragments.TableroFragment"
+            android:layout_width="412dp"
+            android:layout_height="412dp"
+            tools:layout="@layout/fragment_tablero" />
+        <fragment
+            android:id="@+id/detallesFragment"
+            android:name="com.david_galera.hundirlaflota.Fragments.DetallesFragment"
+            android:layout_width="match_parent"
+            android:layout_height="0dp"
+            android:layout_weight="1"
+            tools:layout="@layout/fragment_detalles" />
+
+
+
+
+</LinearLayout>

@@ -1,0 +1,43 @@
+<resources>
+    <string name="app_name">HundirLaFlota</string>
+    <string name="titulo">HUNDIR LA FLOTA</string>
+    <string name="jugar">JUGAR</string>
+    <string name="ranking">RANKING</string>
+    <string name="ayuda">AYUDA</string>
+    <string name="acerca_de">ACERCA DE</string>
+    <string name="generar_tablero">Generar Tablero</string>
+    <string name="barcos_restantes">Barcos restantes:</string>
+    <string name="barcos_hundidos">Barcos Hundidos:</string>
+    <string name="turno">Turno:</string>
+    <string name="añadir">Añadir al Ranking</string>
+    <string name="descIcono">icono</string>
+    <string name="volver">Volver</string>
+    <string name="programaci_n_multimedia_y_de_dispositivos_m_viles">Programación multimedia y de dispositivos móviles</string>
+    <string name="_2_dam">2ºDam</string>
+    <string name="by_david_galera">By David Galera</string>
+    <string name="juego">Jugar</string>
+    <string name="comprobar">Comprobar</string>
+    <string name="muertos">Muertos</string>
+    <string name="intento">Intento</string>
+    <string name="numero">Numero</string>
+    <string name="heridos">Heridos</string>
+    <string name="tiempo">Tiempo</string>
+    <string name="ganador">Has Ganado!</string>
+    <string name="intentos">Intentos</string>
+    <string name="introduce">Introduce tu nombre:</string>
+    <string name="nombre">Nombre Jugador</string>
+    <string name="jugador">Jugador</string>
+    <string name="todo" />
+    <string name="instrucciones">El juego será en un tablero de 8x8, el móvil piensa la colocación de 6 barcos:
+3 barcos de 2 piezas,
+2 barcos de 3 piezas,
+1 barco de 4 piezas.
+Los barcos sólo pueden estar en vertical u horizontal, y no podrán estar uno contiguo de otro.
+En mi turno yo voy marcando la casilla del tablero que quiero echar una bomba, y según la casilla donde caiga será agua, tocado o hundido.
+Si la casilla está en blanco, responderá “agua”.
+Si en la casilla se encuentra parte de un barco responderá “tocado”. En ese caso el jugador tiene derecho a un nuevo disparo y contará como el mismo turno.
+Si en la casilla se encuentra la última parte de un barco ya tocado, responderá “hundido” y también tiene derecho a un nuevo disparo.</string>
+    <string name="barcos_de_2">Barcos de 2:</string>
+    <string name="barcos_de_3">Barcos de 3:</string>
+    <string name="barcos_de_4">Barcos de 4:</string>
+</resources>
