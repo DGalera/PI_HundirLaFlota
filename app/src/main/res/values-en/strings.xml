@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">SinkTheFloat</string>
+    <string name="titulo">Sink The Float</string>
+    <string name="jugar">PLAY</string>
+    <string name="ranking">RANKING</string>
+    <string name="ayuda">HELP</string>
+    <string name="acerca_de">ABOUT</string>
+    <string name="generar_tablero">Generate Board</string>
+    <string name="barcos_restantes">Remaining Ships:</string>
+    <string name="barcos_hundidos">Sunken Ships:</string>
+    <string name="turno">Turn:</string>
+    <string name="añadir">Add to the Ranking</string>
+    <string name="descIcono">icon</string>
+    <string name="volver">Return</string>
+    <string name="programaci_n_multimedia_y_de_dispositivos_m_viles">Multimedia and movile Devices Programing</string>
+    <string name="_2_dam">2ºDam</string>
+    <string name="by_david_galera">By David Galera</string>
+    <string name="juego">Play</string>
+    <string name="comprobar">Check</string>
+    <string name="muertos">Muertos</string>
+    <string name="intento">attempt</string>
+    <string name="numero">Number</string>
+    <string name="heridos">Heridos</string>
+    <string name="tiempo">Time</string>
+    <string name="ganador">You Have Won!</string>
+    <string name="intentos">Attempts</string>
+    <string name="introduce">:</string>
+    <string name="nombre">Player Name</string>
+    <string name="jugador">Player</string>
+    <string name="todo" />
+    <string name="instrucciones">The game consist in 8x8 board, and the device places 6 ships:
+3 ships of 2 pieces,
+2 ships de 3 pieces,
+1 ship de 4 pieces.
+the ships can be placed only vertically or horizontally, and they can`t be touching each other.
+in my turn I´ll push the square where I want to throw the bomb, and depending of the square it`ll be water, touched or sunken.
+if the square is empty , it will answer "water".
+if the square contais a par of a ship it´ll say  “touched”. In this case the player has the right to another shoot and it´ll be coun as the same turn.
+if the square is the last part of the ship, it´ll answer  “sunken” and he player has the right to another shoot too.</string>
+    <string name="barcos_de_2">Ship of 2:</string>
+    <string name="barcos_de_3">Ship of 3:</string>
+    <string name="barcos_de_4">Ship of 4:</string>
+</resources>
