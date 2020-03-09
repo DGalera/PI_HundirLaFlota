@@ -2,6 +2,7 @@ package com.david_galera.hundirlaflota.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.app.DownloadManager;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.sqlite.SQLiteDatabase;
@@ -12,10 +13,23 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 import com.david_galera.hundirlaflota.BaseDatos.BaseDatos;
 import com.david_galera.hundirlaflota.Models.Rank;
 import com.david_galera.hundirlaflota.R;
+import com.google.gson.JsonObject;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import java.io.UnsupportedEncodingException;
+import java.net.URI;
 import java.util.ArrayList;
 
 public class GanarActivity extends AppCompatActivity {
@@ -29,14 +43,17 @@ public class GanarActivity extends AppCompatActivity {
     private String tiempo;
     private int tiempoSegs;
 
-
-    private BaseDatos datos;
-    private SQLiteDatabase db;
+    private RequestQueue requestQueue;
+    private String saveData;
+    private static final String SERVER = "http://10.0.2.2:8080/jugadores";
+    //private BaseDatos datos;
+    //private SQLiteDatabase db;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_ganar);
+
 
         Intentos = (TextView)findViewById(R.id.textViewIntentos2);
         Tiempo = (TextView)findViewById(R.id.textViewTiempo2);
@@ -57,7 +74,13 @@ public class GanarActivity extends AppCompatActivity {
         buttonAñadirRanking.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                addRank();
+                //Convertimos el JSON en STRING
+                String data = "{"+
+                        "\"nombre\":" + "\"" + editTextNombre.getText().toString() + "\","+
+                        "\"intentos\":" + "\"" + Intentos.getText().toString() + "\","+
+                        "\"tiempo\":" + "\"" + Tiempo.getText().toString() + "\""+
+                        "}";
+                addRank(data);
             }
 
         });
@@ -65,17 +88,19 @@ public class GanarActivity extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
-        datos = new BaseDatos(this,"Datos",null,1);
-        db = datos.getWritableDatabase();
+        //datos = new BaseDatos(this,"Datos",null,1);
+        //db = datos.getWritableDatabase();
     }
 
     public void onPause()
     {
         super.onPause();
-        db.close();
+        //db.close();
     }
 
-    public void addRank(){
+    //Funcion VOLLEY metodo POST
+    public void addRank(String data){
+         saveData = data;
         if(editTextNombre.getText().toString().isEmpty())
         {
             Toast.makeText(this, "Introduce tu nombre para añadir al ranking", Toast.LENGTH_LONG).show();
@@ -86,38 +111,47 @@ public class GanarActivity extends AppCompatActivity {
         else
         {
             //creo un nuevo rank y le paso el tiempo en string para mostrarlo correctamente y el tiempo en segundos para poder ordenar el ranking
-            Rank rank = new Rank(intentos, editTextNombre.getText().toString(), tiempo, tiempoSegs);
-            if(db != null)
-            {
-                ContentValues registro = new ContentValues();
-                //meto los valores en el registro
-                registro.put("intentos", rank.getIntentos());
-                registro.put("nombreJugador", rank.getNombreJugador());
-                registro.put("tiempoStr", rank.getTiempoStr());
-                registro.put("tiempoSegs", rank.getTiempoSegs());
-
-                //los añado a la base de datos
-                try{
-                    if(db.insertOrThrow("Ranking", null, registro) == -1)
-                    {
-                        Toast.makeText(this, "Error al añadir el rank", Toast.LENGTH_LONG).show();
-                    }
-                    else
-                    {
-                        Toast.makeText(this, "Rank añadido", Toast.LENGTH_LONG).show();
+            requestQueue = Volley.newRequestQueue(getApplicationContext());
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, SERVER, new Response.Listener<String>() {
+                @Override
+                public void onResponse(String response) {
+                    try {
+                        //DEVOLVER EL RESPONSE EN JSONOBJECT
+                        JSONObject objres = new JSONObject(response);
+                        //Lo imprimimos
+                        Toast.makeText(getApplicationContext(), "Rank añadido", Toast.LENGTH_LONG).show();
                         finish();
+                    } catch (JSONException e) {
+                        Toast.makeText(getApplicationContext(), "Server error", Toast.LENGTH_LONG).show();
                     }
-                } catch (Exception e){
-                    Toast.makeText(this, e.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                }
+            })
+            {
+                @Override
+                public String getBodyContentType() {
+                    return "application/json; charset=utf-8";
                 }
 
-
-            }
-            else
-            {
-                Toast.makeText(this, "Error al acceder a la base de datos", Toast.LENGTH_LONG).show();
-            }
+                @Override
+                public byte[] getBody() throws AuthFailureError {
+                    try {
+                        return saveData == null ? null : saveData.getBytes("utf-8");
+                    } catch (UnsupportedEncodingException uee) {
+                        //Log.v("Unsupported Encoding while trying to get the bytes", data);
+                        return null;
+                    }
+                }
+            };
+            requestQueue.add(stringRequest);
         }
     }
+
+
+
 
 }
