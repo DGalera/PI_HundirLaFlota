@@ -7,7 +7,7 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.david_galera.hundirlaflota.Models.Rank;
+import com.david_galera.hundirlaflota.Models.Ranking;
 import com.david_galera.hundirlaflota.R;
 
 import java.util.List;
@@ -19,10 +19,10 @@ public class MyAdapterRanking extends BaseAdapter {
     //Necesitamos un contexto, un layout que lo pasamos como referencia y una lista de string
     private Context context;
     private int layout;
-    private List<Rank> ranks;
+    private List<Ranking> ranks;
 
     // Nos creamos el constructor
-    public MyAdapterRanking(Context context, int layout, List<Rank> ranks) {
+    public MyAdapterRanking(Context context, int layout, List<Ranking> ranks) {
         this.context = context;
         this.layout = layout;
         this.ranks = ranks;
@@ -66,12 +66,12 @@ public class MyAdapterRanking extends BaseAdapter {
         TextView numIntentosTXT = (TextView) v.findViewById(R.id.numIntentos);
         numIntentosTXT.setText(String.valueOf(numIntentos));
 
-        String nombreJugador = ranks.get(position).getNombreJugador();
+        String nombreJugador = ranks.get(position).getNombre();
 
         TextView nombreJugadorTXT = (TextView) v.findViewById(R.id.idNombreJugador);
         nombreJugadorTXT.setText(nombreJugador);
 
-        String tiempo = ranks.get(position).getTiempoStr();
+        String tiempo = ranks.get(position).getTiempo();
 
         TextView tiempoTXT = (TextView) v.findViewById(R.id.idTiempo);
         tiempoTXT.setText(tiempo);
