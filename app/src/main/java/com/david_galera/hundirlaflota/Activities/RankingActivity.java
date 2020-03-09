@@ -27,7 +27,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RankingActivity extends AppCompatActivity {
 
-    private Button buttonVolver;
+    private Button buttonVolver, buttonRefrescar;
     private List<Ranking> ranking;
     private MyAdapterRanking myAdapterRanking;
     private ListView listView;
@@ -41,6 +41,7 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         buttonVolver = (Button)findViewById(R.id.buttonVolver);
+        buttonRefrescar = (Button)findViewById(R.id.buttonRefresh);
         listView = (ListView) findViewById(R.id.listView);
         ranking = new ArrayList<Ranking>();
         myAdapterRanking = new MyAdapterRanking(this, R.layout.list_ranking, ranking);
@@ -50,6 +51,14 @@ public class RankingActivity extends AppCompatActivity {
 
             public void onClick(View v) {
                 finish();
+            }
+
+        });
+
+        buttonRefrescar.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View v) {
+                ObtenerValores();
             }
 
         });
@@ -76,6 +85,7 @@ public class RankingActivity extends AppCompatActivity {
 
 
     private void ObtenerValores() {
+        ranking.clear();
         StringRequest request = new StringRequest(SERVER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {

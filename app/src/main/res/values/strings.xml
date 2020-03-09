@@ -40,4 +40,5 @@ Si en la casilla se encuentra la √∫ltima parte de un barco ya tocado, responder√
     <string name="barcos_de_2">Barcos de 2:</string>
     <string name="barcos_de_3">Barcos de 3:</string>
     <string name="barcos_de_4">Barcos de 4:</string>
+    <string name="refresh">Refrescar</string>
 </resources>
