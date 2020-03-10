@@ -45,7 +45,7 @@ public class GanarActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private String saveData;
-    private static final String SERVER = "http://10.0.2.2:8080/jugadores";
+    private static final String SERVER = "http://172.30.0.224:8080/rankings";
     //private BaseDatos datos;
     //private SQLiteDatabase db;
 
@@ -55,10 +55,10 @@ public class GanarActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ganar);
 
 
-        Intentos = (TextView)findViewById(R.id.textViewIntentos2);
-        Tiempo = (TextView)findViewById(R.id.textViewTiempo2);
-        buttonAñadirRanking = (Button)findViewById(R.id.buttonAñadirRanking);
-        editTextNombre = (EditText)findViewById(R.id.editTextNombre);
+        Intentos = (TextView) findViewById(R.id.textViewIntentos2);
+        Tiempo = (TextView) findViewById(R.id.textViewTiempo2);
+        buttonAñadirRanking = (Button) findViewById(R.id.buttonAñadirRanking);
+        editTextNombre = (EditText) findViewById(R.id.editTextNombre);
 
 
         Bundle bundle = getIntent().getExtras();
@@ -74,84 +74,74 @@ public class GanarActivity extends AppCompatActivity {
         buttonAñadirRanking.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                //Convertimos el JSON en STRING
-                String data = "{"+
-                        "\"nombre\":" + "\"" + editTextNombre.getText().toString() + "\","+
-                        "\"intentos\":" + "\"" + Intentos.getText().toString() + "\","+
-                        "\"tiempo\":" + "\"" + Tiempo.getText().toString() + "\""+
-                        "}";
-                addRank(data);
+                if (editTextNombre.getText().toString().isEmpty()) {
+                    Toast.makeText(getApplicationContext(), "Introduce tu nombre para añadir al ranking", Toast.LENGTH_LONG).show();
+                } else if (editTextNombre.getText().toString().length() > 5) {
+                    Toast.makeText(getApplicationContext(), "El nombre no puede superar los 5 caracteres", Toast.LENGTH_LONG).show();
+                } else {
+                    String data = "{" +
+                            "\"nombre\":" + "\"" + editTextNombre.getText().toString() + "\"," +
+                            "\"intentos\":" + "\"" + Intentos.getText().toString() + "\"," +
+                            "\"tiempo\":" + "\"" + Tiempo.getText().toString() + "\"" +
+                            "}";
+                    addRank(data);
+                }
             }
 
         });
     }
-    public void onResume()
-    {
+
+    public void onResume() {
         super.onResume();
         //datos = new BaseDatos(this,"Datos",null,1);
         //db = datos.getWritableDatabase();
     }
 
-    public void onPause()
-    {
+    public void onPause() {
         super.onPause();
         //db.close();
     }
 
     //Funcion VOLLEY metodo POST
-    public void addRank(String data){
-         saveData = data;
-        if(editTextNombre.getText().toString().isEmpty())
-        {
-            Toast.makeText(this, "Introduce tu nombre para añadir al ranking", Toast.LENGTH_LONG).show();
-        }
-        else if(editTextNombre.getText().toString().length() > 5){
-            Toast.makeText(this, "El nombre no puede superar los 5 caracteres", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            //creo un nuevo rank y le paso el tiempo en string para mostrarlo correctamente y el tiempo en segundos para poder ordenar el ranking
-            requestQueue = Volley.newRequestQueue(getApplicationContext());
-            StringRequest stringRequest = new StringRequest(Request.Method.POST, SERVER, new Response.Listener<String>() {
-                @Override
-                public void onResponse(String response) {
-                    try {
-                        //DEVOLVER EL RESPONSE EN JSONOBJECT
-                        JSONObject objres = new JSONObject(response);
-                        //Lo imprimimos
-                        Toast.makeText(getApplicationContext(), "Rank añadido", Toast.LENGTH_LONG).show();
-                        finish();
-                    } catch (JSONException e) {
-                        Toast.makeText(getApplicationContext(), "Server error", Toast.LENGTH_LONG).show();
-                    }
+    public void addRank(String data) {
+        saveData = data;
+        requestQueue = Volley.newRequestQueue(getApplicationContext());
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, SERVER, new Response.Listener<String>() {
+            @Override
+            public void onResponse(String response) {
+                try {
+                    //DEVOLVER EL RESPONSE EN JSONOBJECT
+                    JSONObject objres = new JSONObject(response);
+                    //Lo imprimimos
+                    Toast.makeText(getApplicationContext(), "Rank añadido", Toast.LENGTH_LONG).show();
+                    finish();
+                } catch (JSONException e) {
+                    Toast.makeText(getApplicationContext(), "Server error", Toast.LENGTH_LONG).show();
                 }
-            }, new Response.ErrorListener() {
-                @Override
-                public void onErrorResponse(VolleyError error) {
-                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                }
-            })
-            {
-                @Override
-                public String getBodyContentType() {
-                    return "application/json; charset=utf-8";
-                }
+            }
+        }, new Response.ErrorListener() {
+            @Override
+            public void onErrorResponse(VolleyError error) {
+                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+            }
+        }) {
+            @Override
+            public String getBodyContentType() {
+                return "application/json; charset=utf-8";
+            }
 
-                @Override
-                public byte[] getBody() throws AuthFailureError {
-                    try {
-                        return saveData == null ? null : saveData.getBytes("utf-8");
-                    } catch (UnsupportedEncodingException uee) {
-                        //Log.v("Unsupported Encoding while trying to get the bytes", data);
-                        return null;
-                    }
+            @Override
+            public byte[] getBody() throws AuthFailureError {
+                try {
+                    return saveData == null ? null : saveData.getBytes("utf-8");
+                } catch (UnsupportedEncodingException uee) {
+                    //Log.v("Unsupported Encoding while trying to get the bytes", data);
+                    return null;
                 }
-            };
-            requestQueue.add(stringRequest);
-        }
+            }
+        };
+        requestQueue.add(stringRequest);
     }
-
-
 
 
 }
