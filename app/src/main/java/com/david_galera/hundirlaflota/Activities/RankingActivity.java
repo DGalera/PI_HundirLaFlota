@@ -34,7 +34,7 @@ public class RankingActivity extends AppCompatActivity {
 
 
 
-    private static final String SERVER = "http://10.0.2.2:8080/jugadores";
+    private static final String SERVER = "http://172.30.0.224:8080/rankings";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,6 +86,8 @@ public class RankingActivity extends AppCompatActivity {
 
     private void ObtenerValores() {
         ranking.clear();
+        //En el response le el valor del json es decir
+        //[{“_id”:”43432424”,”nombre”:”Javier”….}]
         StringRequest request = new StringRequest(SERVER, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
