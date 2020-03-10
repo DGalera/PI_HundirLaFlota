@@ -30,7 +30,7 @@ public class Tablero extends View{
     private int tamaño = 8;
     private int ancho;
     private int anchoCasilla;
-    private boolean debugMode = false;
+    private boolean debugMode = true;
     private int barcosHundidos;
     private int barcosRestantes;
     private int turno;

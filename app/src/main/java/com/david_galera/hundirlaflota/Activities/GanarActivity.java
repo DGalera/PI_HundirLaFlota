@@ -2,10 +2,6 @@ package com.david_galera.hundirlaflota.Activities;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-import android.app.DownloadManager;
-import android.content.ContentValues;
-import android.content.Intent;
-import android.database.sqlite.SQLiteDatabase;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
@@ -20,17 +16,13 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.david_galera.hundirlaflota.BaseDatos.BaseDatos;
-import com.david_galera.hundirlaflota.Models.Rank;
+import com.david_galera.hundirlaflota.Models.Ranking;
 import com.david_galera.hundirlaflota.R;
-import com.google.gson.JsonObject;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.io.UnsupportedEncodingException;
-import java.net.URI;
-import java.util.ArrayList;
 
 public class GanarActivity extends AppCompatActivity {
     private TextView Numero;
@@ -45,7 +37,7 @@ public class GanarActivity extends AppCompatActivity {
 
     private RequestQueue requestQueue;
     private String saveData;
-    private static final String SERVER = "http://172.30.0.224:8080/rankings";
+    private static final String SERVER = "http://10.0.2.2:8080/rankings";
     //private BaseDatos datos;
     //private SQLiteDatabase db;
 
@@ -57,16 +49,16 @@ public class GanarActivity extends AppCompatActivity {
 
         Intentos = (TextView) findViewById(R.id.textViewIntentos2);
         Tiempo = (TextView) findViewById(R.id.textViewTiempo2);
+        TextView nombrejugador = (TextView) findViewById(R.id.textViewNombre);
         buttonAñadirRanking = (Button) findViewById(R.id.buttonAñadirRanking);
-        editTextNombre = (EditText) findViewById(R.id.editTextNombre);
 
+        nombrejugador.setText(MainActivity.jugador.getNombre());
 
         Bundle bundle = getIntent().getExtras();
 
         //cojo los datos del intent
         intentos = bundle.getInt("intentos");
         tiempo = bundle.getString("tiempo");
-        tiempoSegs = bundle.getInt("tiempoSegs");
 
         Intentos.setText(String.valueOf(intentos));
         Tiempo.setText(tiempo);
@@ -74,33 +66,17 @@ public class GanarActivity extends AppCompatActivity {
         buttonAñadirRanking.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View v) {
-                if (editTextNombre.getText().toString().isEmpty()) {
-                    Toast.makeText(getApplicationContext(), "Introduce tu nombre para añadir al ranking", Toast.LENGTH_LONG).show();
-                } else if (editTextNombre.getText().toString().length() > 5) {
-                    Toast.makeText(getApplicationContext(), "El nombre no puede superar los 5 caracteres", Toast.LENGTH_LONG).show();
-                } else {
-                    String data = "{" +
-                            "\"nombre\":" + "\"" + editTextNombre.getText().toString() + "\"," +
-                            "\"intentos\":" + "\"" + Intentos.getText().toString() + "\"," +
-                            "\"tiempo\":" + "\"" + Tiempo.getText().toString() + "\"" +
-                            "}";
+
+                Ranking ranking = new Ranking(MainActivity.jugador.getNombre(), intentos, tiempo);
+
+                    String data = ranking.toJSON();
                     addRank(data);
                 }
-            }
+            //}
 
         });
     }
 
-    public void onResume() {
-        super.onResume();
-        //datos = new BaseDatos(this,"Datos",null,1);
-        //db = datos.getWritableDatabase();
-    }
-
-    public void onPause() {
-        super.onPause();
-        //db.close();
-    }
 
     //Funcion VOLLEY metodo POST
     public void addRank(String data) {
@@ -113,7 +89,7 @@ public class GanarActivity extends AppCompatActivity {
                     //DEVOLVER EL RESPONSE EN JSONOBJECT
                     JSONObject objres = new JSONObject(response);
                     //Lo imprimimos
-                    Toast.makeText(getApplicationContext(), "Rank añadido", Toast.LENGTH_LONG).show();
+                    //Toast.makeText(getApplicationContext(), "Rank añadido", Toast.LENGTH_LONG).show();
                     finish();
                 } catch (JSONException e) {
                     Toast.makeText(getApplicationContext(), "Server error", Toast.LENGTH_LONG).show();

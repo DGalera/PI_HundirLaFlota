@@ -1,6 +1,7 @@
 
 package com.david_galera.hundirlaflota.Models;
 
+import com.david_galera.hundirlaflota.Activities.MainActivity;
 import com.google.gson.annotations.Expose;
 import com.google.gson.annotations.SerializedName;
 
@@ -62,6 +63,12 @@ public class Ranking {
         this.v = v;
     }
 
+    public Ranking(String nombre, Integer intentos, String tiempo) {
+        this.nombre = nombre;
+        this.intentos = intentos;
+        this.tiempo = tiempo;
+    }
+
     public int getTiempoSegs(){
         String[] units = getTiempo().split(":"); //will break the string up into an array
         int hours = Integer.parseInt(units[0]);
@@ -71,4 +78,11 @@ public class Ranking {
         return duration;
     }
 
+    public String toJSON() {
+        return "{" +
+                "\"nombre\":" + "\"" + getNombre() + "\"," +
+                "\"intentos\":" + "\"" + getIntentos() + "\"," +
+                "\"tiempo\":" + "\"" + getTiempo() + "\"" +
+                "}";
+    }
 }

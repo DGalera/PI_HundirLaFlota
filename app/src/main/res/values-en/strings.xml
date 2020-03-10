@@ -15,7 +15,7 @@
     <string name="volver">Return</string>
     <string name="programaci_n_multimedia_y_de_dispositivos_m_viles">Multimedia and movile Devices Programing</string>
     <string name="_2_dam">2ºDam</string>
-    <string name="by_david_galera">By David Galera</string>
+    <string name="by">By David Galera, Javier González y Xabier Martirena</string>
     <string name="juego">Play</string>
     <string name="comprobar">Check</string>
     <string name="muertos">Muertos</string>
@@ -42,4 +42,11 @@ if the square is the last part of the ship, it´ll answer  “sunken” and he p
     <string name="barcos_de_3">Ship of 3:</string>
     <string name="barcos_de_4">Ship of 4:</string>
     <string name="refresh">Refresh</string>
+    <string name="jugadores">Players</string>
+    <string name="conectados">Online</string>
+    <string name="jugadores_online">ONLINE PLAYERS</string>
+    <string name="proyecto_intermodular">Intermodular Proyect</string>
+    <string name="acceso">Login</string>
+    <string name="introduce_el_nombre">Enter your name</string>
+    <string name="acceder">ok</string>
 </resources>

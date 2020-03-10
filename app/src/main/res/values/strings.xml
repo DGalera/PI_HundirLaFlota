@@ -14,7 +14,7 @@
     <string name="volver">Volver</string>
     <string name="programaci_n_multimedia_y_de_dispositivos_m_viles">Programación multimedia y de dispositivos móviles</string>
     <string name="_2_dam">2ºDam</string>
-    <string name="by_david_galera">By David Galera</string>
+    <string name="by">By David Galera, Javier González y Xabier Martirena</string>
     <string name="juego">Jugar</string>
     <string name="comprobar">Comprobar</string>
     <string name="muertos">Muertos</string>
@@ -25,7 +25,7 @@
     <string name="ganador">Has Ganado!</string>
     <string name="intentos">Intentos</string>
     <string name="introduce">Introduce tu nombre:</string>
-    <string name="nombre">Nombre Jugador</string>
+    <string name="nombre">Nombre</string>
     <string name="jugador">Jugador</string>
     <string name="todo" />
     <string name="instrucciones">El juego será en un tablero de 8x8, el móvil piensa la colocación de 6 barcos:
@@ -41,4 +41,11 @@ Si en la casilla se encuentra la última parte de un barco ya tocado, responder�
     <string name="barcos_de_3">Barcos de 3:</string>
     <string name="barcos_de_4">Barcos de 4:</string>
     <string name="refresh">Refrescar</string>
+    <string name="jugadores">Jugadores</string>
+    <string name="conectados">Conectados</string>
+    <string name="jugadores_online">JUGADORES ONLINE</string>
+    <string name="proyecto_intermodular">Proyecto Intermodular</string>
+    <string name="acceso">Acceso</string>
+    <string name="introduce_el_nombre">Introduce el nombre</string>
+    <string name="acceder">Acceder</string>
 </resources>

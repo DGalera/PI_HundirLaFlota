@@ -4,15 +4,16 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".Fragments.DetallesFragment"
-    android:background="@color/colorPrimary"
+    android:background="@drawable/bg_color"
     android:orientation="vertical"
-    android:gravity="center_horizontal">
+    android:gravity="center_horizontal"
+    android:padding="10dp">
     <TextView
+        android:textColor="@android:color/white"
         android:id="@+id/cronometro"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:textSize="30sp"
-        android:layout_margin="5dp"
+        android:textSize="20sp"
         />
     <Space
         android:layout_width="match_parent"
@@ -25,17 +26,19 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:id="@+id/tvTurnos"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:text="@string/turno"/>
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvTurnosNum" />
 
 
@@ -45,15 +48,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvBarcosDe2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/barcos_de_2" />
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvBarcosDe2num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -63,15 +68,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
             android:id="@+id/tvBarcosDe3"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/barcos_de_3" />
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvBarcosDe3num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -80,15 +87,17 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
             android:id="@+id/tvBarcosDe4"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="@string/barcos_de_4" />
         <TextView
+            android:textColor="@android:color/white"
             android:layout_margin="5dp"
-            android:textSize="30sp"
+            android:textSize="20sp"
             android:id="@+id/tvBarcosDe4num"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />

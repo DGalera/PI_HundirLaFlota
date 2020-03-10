@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Toast;
@@ -35,7 +36,7 @@ public class RankingActivity extends AppCompatActivity {
 
 
 
-    private static final String SERVER = "http://172.30.0.224:8080/rankings";
+    private static final String SERVER = "http://10.0.2.2:8080/rankings";
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -44,8 +45,11 @@ public class RankingActivity extends AppCompatActivity {
         buttonVolver = (Button)findViewById(R.id.buttonVolver);
         listView = (ListView) findViewById(R.id.listView);
         ranking = new ArrayList<Ranking>();
+
         myAdapterRanking = new MyAdapterRanking(this, R.layout.list_ranking, ranking);
         listView.setAdapter(myAdapterRanking);
+        ViewGroup headerView = (ViewGroup)getLayoutInflater().inflate(R.layout.header_ranking, listView,false);
+        listView.addHeaderView(headerView);
 
         buttonVolver.setOnClickListener(new View.OnClickListener() {
 
@@ -60,9 +64,13 @@ public class RankingActivity extends AppCompatActivity {
         final Runnable runnable = new Runnable(){
             @Override
             public void run(){
-                ObtenerValores();
+                try {
+                    getRankings();
 
-                timer.postDelayed(this,2000);
+                    timer.postDelayed(this, 10000);
+                } catch (Exception e){
+
+                }
 
             }
         };
@@ -78,18 +86,7 @@ public class RankingActivity extends AppCompatActivity {
         this.myAdapterRanking.notifyDataSetChanged();
     }
 
-    public void onResume()
-    {
-        super.onResume();
-    }
-    public void onPause()
-    {
-        super.onPause();
-    }
-
-
-
-    private void ObtenerValores() {
+    private void getRankings() {
         ranking.clear();
         //En el response le el valor del json es decir
         //[{“_id”:”43432424”,”nombre”:”Javier”….}]
