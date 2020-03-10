@@ -1,6 +1,7 @@
 package com.david_galera.hundirlaflota.Activities;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -27,7 +28,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 public class RankingActivity extends AppCompatActivity {
 
-    private Button buttonVolver, buttonRefrescar;
+    private Button buttonVolver;
     private List<Ranking> ranking;
     private MyAdapterRanking myAdapterRanking;
     private ListView listView;
@@ -41,7 +42,6 @@ public class RankingActivity extends AppCompatActivity {
         setContentView(R.layout.activity_ranking);
 
         buttonVolver = (Button)findViewById(R.id.buttonVolver);
-        buttonRefrescar = (Button)findViewById(R.id.buttonRefresh);
         listView = (ListView) findViewById(R.id.listView);
         ranking = new ArrayList<Ranking>();
         myAdapterRanking = new MyAdapterRanking(this, R.layout.list_ranking, ranking);
@@ -55,13 +55,19 @@ public class RankingActivity extends AppCompatActivity {
 
         });
 
-        buttonRefrescar.setOnClickListener(new View.OnClickListener() {
 
-            public void onClick(View v) {
+        final Handler timer = new Handler();
+        final Runnable runnable = new Runnable(){
+            @Override
+            public void run(){
                 ObtenerValores();
-            }
 
-        });
+                timer.postDelayed(this,2000);
+
+            }
+        };
+
+        timer.postDelayed(runnable,0);
     }
 
 
@@ -75,7 +81,6 @@ public class RankingActivity extends AppCompatActivity {
     public void onResume()
     {
         super.onResume();
-        ObtenerValores();
     }
     public void onPause()
     {
